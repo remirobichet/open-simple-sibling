@@ -21,6 +21,11 @@
 			}
 		]
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/remirobichet/open-simple-sibling.git"
+	},
+	"publisher": "remirobichet",
 	"scripts": {
 		"lint": "eslint .",
 		"pretest": "yarn run lint",
