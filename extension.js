@@ -16,7 +16,7 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('open-single-sibling.openSibling', async function () {
 		if (!vscode.window.activeTextEditor) {
-			vscode.window.showInformationMessage('Cannot open single sibling because there is no opened file');
+			vscode.window.showErrorMessage('Cannot open single sibling because there is no opened file');
 			return
 		}
 		
@@ -24,15 +24,19 @@ function activate(context) {
 		const currentlyOpenTabfileName = path.basename(currentlyOpenTabfilePath);
 		const currentlyOpenTabfileDir = path.dirname(currentlyOpenTabfilePath);
 
-		let fileCount = (await fsp.readdir(currentlyOpenTabfileDir)).length
-		console.error('fileCount',fileCount)
-
+		let files = (await fsp.readdir(currentlyOpenTabfileDir))
+		let fileCount = 0
+		for (const i in files) {
+			if (fs.lstatSync(`${currentlyOpenTabfileDir}/${files[i]}`).isFile()) {
+				fileCount++
+			}
+		}
 		if (fileCount !== 2) {
 			if (fileCount < 2) {
-				vscode.window.showInformationMessage('Cannot open single sibling because there is less than 2 file in the folder');
+				vscode.window.showErrorMessage('Cannot open single sibling because there is less than 2 file in the folder');
 			}
 			if (fileCount > 2) {
-				vscode.window.showInformationMessage('Cannot open single sibling because there is more than 2 file in the folder');
+				vscode.window.showErrorMessage('Cannot open single sibling because there is more than 2 file in the folder');
 			}
 			return
 		}
@@ -46,7 +50,7 @@ function activate(context) {
 		console.error('siblingName',siblingName)
 
 		if (!siblingName) {
-			vscode.window.showInformationMessage('Error retrieving siglings name');
+			vscode.window.showErrorMessage('Error retrieving siglings name');
 			return
 		}
 		
