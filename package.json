@@ -2,7 +2,7 @@
 	"name": "open-single-sibling",
 	"displayName": "open-single-sibling",
 	"description": "",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.66.0"
