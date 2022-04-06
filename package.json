@@ -3,6 +3,7 @@
 	"displayName": "open-single-sibling",
 	"description": "",
 	"version": "1.0.1",
+	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.66.0"
 	},
